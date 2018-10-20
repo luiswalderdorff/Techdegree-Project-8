@@ -55,3 +55,6 @@ function displayUsers(data) {
 
 
   // Open modal on Click
+usersClass.addEventListener('click',function(e){
+     document.querySelectorAll(".modal").style.display = "block";
+});
