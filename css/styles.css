@@ -1,5 +1,9 @@
+body {
+  background-color: rgb(235, 235, 235);
+}
+
 h2 {
-  padding-left: 4%;
+  text-align: center;
   color: grey;
 }
 
@@ -28,6 +32,8 @@ h2 {
   border: grey 1px solid;
   padding: 10px;
   overflow-x: auto;
+  background-color: white;
+  box-shadow: 4px 4px lightgrey;
 
 }
 
