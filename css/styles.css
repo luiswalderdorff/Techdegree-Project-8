@@ -8,8 +8,12 @@ h2 {
 }
 
 .modal {
+
+}
+
+#mod {
   display: none;
-  position: fixed;
+  /* position: fixed; */
   z-index: 999;
 }
 

@@ -39,7 +39,7 @@ function displayUsers(data) {
   usersClass.innerHTML = userHTML;
 
     // Hidden Modal Interface
-    var modalHTML = '<ul class="modal"';
+    var modalHTML = '<ul class="modal" id="mod"';
     data.forEach(function(results) {
       modalHTML += `<li class="modal-box">`;
       modalHTML += '<img src="' + results.picture.large + '"></li>';
@@ -55,8 +55,9 @@ function displayUsers(data) {
 
 
   // Open modal on Click
-$(document).ready(
-  usersClass.addEventListener('click',function(e){
-       document.querySelectorAll(".modal").style.display = "block";
-  })
-);
+
+usersClass.addEventListener('click',function(e){
+     document.getElementById("mod").style.display = "block";
+});
+
+//write of for loop with an if statement to only show the right modal window
