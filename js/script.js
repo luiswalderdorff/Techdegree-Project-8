@@ -1,8 +1,8 @@
 // Variables
-const randomAPI ="https://randomuser.me/api/?results=12";
+const randomAPI ="https://randomuser.me/api/?results=12&nat=us,gb";
 
 const randomOptions = {
-  url: 'https://randomuser.me/api/?results=12',
+  url: 'https://randomuser.me/api/?results=12?nat=us,gb',
   dataType: 'json',
 };
 
@@ -26,8 +26,12 @@ console.log(userData);
 //Capitalize Words
 
 const capitalize = (s) => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
+  if (typeof s !== 'string') {
+    return '';
+  } else {
+  return s.replace(/\w\S*/g, function (txt) { //dont quite understand ths function
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+  });}
 }
 // Create HTML
 function displayUsers(data) {
@@ -47,12 +51,13 @@ function displayUsers(data) {
   var modalHTML = '<ul class="modal" id="mod">';
   data.forEach(function(results) {
     modalHTML += `<li class="modal-box">`;
-    modalHTML += '<img class="modal-pic" src="' + results.picture.large + '">';
-    modalHTML += `<p>${results.name.first} ${results.name.last}</p>`;
-    modalHTML += `<p>${results.email}</p>`;
+    modalHTML += '<div class="modal-first"> <p class="x-close">X</p> <img class="modal-pic" src="' + results.picture.large + '">';
+    modalHTML += `<p>${capitalize(results.name.first)} ${capitalize(results.name.last)}</p>`;
+    modalHTML += `<p>${capitalize(results.location.city)}</p></div>`;
+    modalHTML += `<div class="modal-second" <p>${results.email}</p>`;
     modalHTML += `<p>${results.cell}</p>`;
-    modalHTML += `<p>${results.location.street}, ${results.location.city}, ${results.location.state}, ${results.location.postcode}</p>`;
-    modalHTML += `<p>${results.dob.date.substring(0.10)}</p></li>`;
+    modalHTML += `<p>${capitalize(results.location.street)}, ${capitalize(results.location.state)}, ${results.location.postcode}</p>`;
+    modalHTML += `<p>Birthday: ${results.dob.date.substring(0,10)}</p><div class="arrows"<span class="left-arrow">&#8592</span><span class="right-arrow">&#8594</span></div></div></li>`;
   }) // end each
   modalHTML += '</ul>';
   modalClass.innerHTML = modalHTML;
@@ -61,6 +66,22 @@ function displayUsers(data) {
   }; // end each
 
 
+
+
+
+
+
+
+
+
+
+
+
+  $(document).ready(
+    $(".user-box").click( function () {
+      console.log("clicked");
+    })
+  )
 
 // if (.modal-pic.src === .user-pic.src) then show. Loop through the different modal boxes. is the first modal-box = modal[0]?
 // .modal.children[i]
@@ -78,9 +99,3 @@ function displayUsers(data) {
 //   if ()
 //   $(".modal").show();
 // })
-
-$(document).ready(
-  $(".user-box").click( function () {
-    console.log("clicked");
-  })
-)

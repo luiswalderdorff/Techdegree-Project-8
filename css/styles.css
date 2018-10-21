@@ -8,7 +8,8 @@ h2 {
 }
 
 .modal {
-
+  width: 50%;
+  margin: 0 auto;
 }
 
 #mod {
@@ -46,12 +47,53 @@ h2 {
   color: white;
 }
 
-.user-pic {
+.user-pic,
+.modal-pic {
   border-radius: 50%;
   flex-basis: 25%;
+  padding-top: 5px;
 }
 
 .user-info {
   flex-basis: 75%;
   padding-left: 10%;
+}
+
+.modal-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid grey;
+}
+
+.x-close {
+  text-align: right;
+  margin-top: 5%;
+}
+
+.modal-first {
+  padding-bottom: 10px;
+  border-bottom: grey 1px solid;
+  width: 90%;
+  text-align: center;
+}
+
+.modal-second {
+  padding-top: 25px;
+  text-align: center;
+}
+
+.arrows {
+  font-size: 25px;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+}
+
+.arrow-left {
+  text-align: left;
+}
+
+.arrow-right {
+  text-align: right;
 }
