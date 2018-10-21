@@ -19,6 +19,43 @@ fetch(randomAPI)
   .then(data => {
     users = data.results;
     displayUsers(users);
+    // Functions for dynamically created elements
+    $(document).ready(
+      $(".user-box").click( function (e) {
+        const click = e.target;
+        console.log(click.parentNode.children[0].src);
+        for(let i = 0; i <= $(".modal-box").length-1; i++) {
+          if(click.parentNode.children[0].src === $(".modal-box")[i].children[0].children[1].src) {
+          $(".modal-box").eq(i).show();
+          $("#mod").show();
+
+        }
+      }
+    }
+
+  ));
+    //Close modal window with the x
+    $(".x-close").click(function(e) {
+      e.target.parentNode.parentNode.style.display = "none";
+      $("#mod").hide();
+    })
+    // Arrows to move between modal windows
+    $(".left-arrow").click(function (e) {
+      if (e.target.parentNode.parentNode.parentNode.previousSibling !== null) {
+      e.target.parentNode.parentNode.parentNode.style.display = "none";
+      e.target.parentNode.parentNode.parentNode.previousSibling.style.display = "block";
+    }
+
+    })
+
+    $(".right-arrow").click(function (e) {
+      if (e.target.parentNode.parentNode.parentNode.nextSibling !== null) {
+      e.target.parentNode.parentNode.parentNode.style.display = "none";
+      e.target.parentNode.parentNode.parentNode.nextSibling.style.display = "block";
+    }
+    })
+    searchBox();
+
 }).then(data => userData = data);
 
 console.log(userData);
@@ -51,13 +88,13 @@ function displayUsers(data) {
   var modalHTML = '<ul class="modal" id="mod">';
   data.forEach(function(results) {
     modalHTML += `<li class="modal-box">`;
-    modalHTML += '<div class="modal-first"> <p class="x-close">X</p> <img class="modal-pic" src="' + results.picture.large + '">';
+    modalHTML += '<div class="modal-first"> <p class="x-close">&times</p> <img class="modal-pic" src="' + results.picture.large + '">';
     modalHTML += `<p>${capitalize(results.name.first)} ${capitalize(results.name.last)}</p>`;
     modalHTML += `<p>${capitalize(results.location.city)}</p></div>`;
     modalHTML += `<div class="modal-second" <p>${results.email}</p>`;
     modalHTML += `<p>${results.cell}</p>`;
     modalHTML += `<p>${capitalize(results.location.street)}, ${capitalize(results.location.state)}, ${results.location.postcode}</p>`;
-    modalHTML += `<p>Birthday: ${results.dob.date.substring(0,10)}</p><div class="arrows"<span class="left-arrow">&#8592</span><span class="right-arrow">&#8594</span></div></div></li>`;
+    modalHTML += `<p>Birthday: ${results.dob.date.substring(0,10)}</p><div class="arrows"><span class="left-arrow">&#8592</span><span class="right-arrow">&#8594</span></div></div></li>`;
   }) // end each
   modalHTML += '</ul>';
   modalClass.innerHTML = modalHTML;
@@ -66,36 +103,29 @@ function displayUsers(data) {
   }; // end each
 
 
+// Button to Exit the modal window
 
 
 
 
+//searchbox
+function searchBox () {
+	// Declare variables
+	var input, filter, users, user, picture, i;
+	input = document.getElementById('search');
+	filter = input.value.toUpperCase();
+	users = $(".users ul");
+	user = $(".user-box");
 
-
-
-
-
-
-
-  $(document).ready(
-    $(".user-box").click( function () {
-      console.log("clicked");
-    })
-  )
-
-// if (.modal-pic.src === .user-pic.src) then show. Loop through the different modal boxes. is the first modal-box = modal[0]?
-// .modal.children[i]
-
-  // Open modal on Click
-  //write of for loop with an if statement to only show the right modal window
-
-// usersClass.addEventListener('click',function(e){
-//   for(let i = 0; i >= usersClass.length; i++) {
-//     if
-//      document.getElementById("mod").style.display = "block";
-//    }
-// });
-// $(document).on("click", ".user-box", function(e) {
-//   if ()
-//   $(".modal").show();
-// })
+	// Loop through all user(s) and hide those who dont match the search query
+	for (i = 0; i < user.length; i++) {
+		boxText = user[i].getElementsByTagName("p")[0];
+		if (boxText) {
+			if (boxText.innerHTML.toUpperCase().indexOf(filter) > -1) {
+				user[i].style.display = "";
+			} else {
+				user[i].style.display = "none";
+			}
+		}
+	}
+}
