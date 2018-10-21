@@ -19,8 +19,9 @@ fetch(randomAPI)
   .then(data => {
     users = data.results;
     displayUsers(users);
-}).then(data => userData = data)
-  .then(data => console.log(userData));
+}).then(data => userData = data);
+
+console.log(userData);
 
 //Capitalize Words
 
@@ -75,3 +76,9 @@ function displayUsers(data) {
 //   if ()
 //   $(".modal").show();
 // })
+
+$(document).ready(
+  $(".user-box").click( function () {
+    console.log("clicked");
+  })
+)
