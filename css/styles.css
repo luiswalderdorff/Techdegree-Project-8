@@ -97,6 +97,7 @@ h2 {
   border-bottom: grey 1px solid;
   width: 90%;
   text-align: center;
+  margin: 0 auto;
 }
 
 .modal-second {

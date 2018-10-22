@@ -21,11 +21,11 @@ fetch(randomAPI)
     displayUsers(users);
     // Functions for dynamically created elements
     $(document).ready(
+      //open the equivalent modal window
       $(".user-box").click( function (e) {
         const click = e.target;
-        console.log(click.parentNode.children[0].src);
         for(let i = 0; i <= $(".modal-box").length-1; i++) {
-          if(click.parentNode.children[0].src === $(".modal-box")[i].children[0].children[1].src) {
+          if(click.parentNode.children[0].src === $(".modal-box")[i].children[0].children[1].src || click.parentNode.parentNode.children[0].src === $(".modal-box")[i].children[0].children[1].src || click.parentNode.parentNode.parentNode.children[0].src === $(".modal-box")[i].children[0].children[1].src) {
           $(".modal-box").eq(i).show();
           $("#mod").show();
 
@@ -34,6 +34,8 @@ fetch(randomAPI)
     }
 
   ));
+
+
     //Close modal window with the x
     $(".x-close").click(function(e) {
       e.target.parentNode.parentNode.style.display = "none";
@@ -77,7 +79,7 @@ function displayUsers(data) {
   data.forEach(function(results) {
     userHTML += `<li class="user-box">`;
     userHTML += '<img src="' + results.picture.large + '" class="user-pic">';
-    userHTML += `<div class="user-info"><p>${capitalize(results.name.first)} ${capitalize(results.name.last)}</p>`;
+    userHTML += `<div class="user-info"><p><strong>${capitalize(results.name.first)} ${capitalize(results.name.last)}</strong></p>`;
     userHTML += `<p>${capitalize(results.location.city)}</p>`;
     userHTML += `<p>${results.email}</p></div></li>`;
   })
@@ -89,7 +91,7 @@ function displayUsers(data) {
   data.forEach(function(results) {
     modalHTML += `<li class="modal-box">`;
     modalHTML += '<div class="modal-first"> <p class="x-close">&times</p> <img class="modal-pic" src="' + results.picture.large + '">';
-    modalHTML += `<p>${capitalize(results.name.first)} ${capitalize(results.name.last)}</p>`;
+    modalHTML += `<p><strong>${capitalize(results.name.first)} ${capitalize(results.name.last)}</strong></p>`;
     modalHTML += `<p>${capitalize(results.location.city)}</p></div>`;
     modalHTML += `<div class="modal-second" <p>${results.email}</p>`;
     modalHTML += `<p>${results.cell}</p>`;
